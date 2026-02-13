@@ -10,9 +10,9 @@ SAM2-Palindrome Self-Training with Cycle Consistency
 
 **Extended OC-CCL paper (https://arxiv.org/abs/2501.06749) for simultaneous multi-structure segmentation in taxonomic specimens**
 
-> 🚀 **NEW:** Train on multiple structures simultaneously  
+> 🚀 **NEW:** Train on multiple structures simultaneously from multiple specimens
 > 🔬 Segment scape, antenna, and eye from one template  
-> ⚡ Extended from ["One Click is All You Need"](https://arxiv.org/abs/2501.06749)
+
 
 ---
 
