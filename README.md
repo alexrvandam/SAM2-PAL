@@ -3,12 +3,12 @@ SAM2-Palindrome Self-Training with Cycle Consistency
 
 # SAM2-PAL: Multi-Object Self-Training with Cycle Consistency
 
-[![arXiv](https://img.shields.io/badge/arXiv-2501.06749-b31b1b.svg)](https://arxiv.org/abs/2501.06749)
+
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Extended OC-CCL for simultaneous multi-structure segmentation in taxonomic specimens**
+**Extended OC-CCL paper (https://arxiv.org/abs/2501.06749) for simultaneous multi-structure segmentation in taxonomic specimens**
 
 > 🚀 **NEW:** Train on multiple structures simultaneously  
 > 🔬 Segment scape, antenna, and eye from one template  
