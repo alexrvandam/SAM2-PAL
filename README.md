@@ -99,7 +99,7 @@ wget https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_base_pl
 
 🚀 Usage
 Basic: Single Template, Single Structure
-bashpython sam2_pal_batch_v17_fixed.py \
+bashpython sam2_pal_batch_v17.py \
     --template_mask antenna_mask.png \
     --template_image specimen_001.jpg \
     --image_dir ./specimens/ \
@@ -174,7 +174,7 @@ json{
   "categories": [...]
 }
 Run with training mode:
-bashpython sam2_pal_batch_v17_fixed.py \
+bashpython sam2_pal_batch_v17.py \
     --training_json three_templates.json \
     --image_dir ./unlabeled_specimens/ \
     --output_dir ./results/ \
@@ -212,6 +212,169 @@ bashpython sam2_pal_batch_v17_fixed.py \
     --image_dir ./new_specimens/ \
     --output_dir ./final_results/ \
     --sam2_checkpoint ./finetuned/best_checkpoint.pth
+
+More example Recipes: 
+1) Minimal: propagate from a template mask (no fine-tuning)
+python sam2_pal_batch_v17.py \
+  --template_image /path/to/template.jpg \
+  --template_mask  /path/to/template_mask.png \
+  --image_dir      /path/to/targets/ \
+  --output_dir     /path/to/out_pal_v17/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2_hiera_large.pt \
+  --sam2_config     /path/to/sam2_configs/sam2_hiera_l.yaml \
+  --save_vis
+
+
+Uses SAM2 tracking on a pseudo-video to propagate the template mask. 
+
+sam2_pal_batch_v17
+
+2) Multi-mask template via COCO JSON (train/predict multiple structures)
+python sam2_pal_batch_v17.py \
+  --template_image /path/to/template.jpg \
+  --template_json  /path/to/template_multi_masks_coco.json \
+  --image_dir      /path/to/targets/ \
+  --output_dir     /path/to/out_pal_v17_multimask/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2_hiera_large.pt \
+  --sam2_config     /path/to/sam2_configs/sam2_hiera_l.yaml \
+  --multi_mask \
+  --save_vis
+
+
+v17 explicitly supports using all masks from --template_json for training templates (not just the first). 
+
+sam2_pal_batch_v17
+
+3) “Stability first” propagation (reduce drift)
+python sam2_pal_batch_v17.py \
+  --template_image /path/to/template.jpg \
+  --template_json  /path/to/template_multi_masks_coco.json \
+  --image_dir      /path/to/targets/ \
+  --output_dir     /path/to/out_pal_v17_stable/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2_hiera_large.pt \
+  --sam2_config     /path/to/sam2_configs/sam2_hiera_l.yaml \
+  --interleave_template \
+  --area_growth_limit 2.0 \
+  --area_clamp_pad 15 \
+  --save_vis
+
+
+--interleave_template: builds [T, I1, T, I2, ...] to reduce drift
+
+--area_growth_limit + --area_clamp_pad: clamps explosive mask growth using prior bbox 
+
+sam2_pal_batch_v17
+
+4) PAL fine-tuning (OC-CCL style) + LoRA (recommended)
+python sam2_pal_batch_v17.py \
+  --template_image /path/to/template.jpg \
+  --template_json  /path/to/template_multi_masks_coco.json \
+  --image_dir      /path/to/targets/ \
+  --output_dir     /path/to/out_pal_v17_train_lora/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2_hiera_large.pt \
+  --sam2_config     /path/to/sam2_configs/sam2_hiera_l.yaml \
+  --pal_finetuning \
+  --use_lora --lora_rank 16 \
+  --num_epochs 25 --learning_rate 1e-4 \
+  --max_images_per_epoch 100 \
+  --save_vis
+
+
+This runs the “PAL” (palindrome) fine-tuning path with the memory-reset logic described in the script header, then propagates. 
+
+sam2_pal_batch_v17
+
+5) PAL fine-tuning with multiple annotated training images (multi-template training)
+
+If you have more than one annotated image (highly recommended), point PAL to a COCO file + directory:
+
+python sam2_pal_batch_v17.py \
+  --template_image /path/to/template.jpg \
+  --template_json  /path/to/template_multi_masks_coco.json \
+  --training_json  /path/to/training_set_coco.json \
+  --training_images_dir /path/to/training_images/ \
+  --image_dir      /path/to/targets/ \
+  --output_dir     /path/to/out_pal_v17_multitemplate/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2_hiera_large.pt \
+  --sam2_config     /path/to/sam2_configs/sam2_hiera_l.yaml \
+  --pal_finetuning \
+  --use_lora --lora_rank 16 \
+  --num_epochs 25 --learning_rate 1e-4 \
+  --max_images_per_epoch 100
+
+
+--training_json/--training_images_dir loads additional training templates beyond the primary template. 
+
+sam2_pal_batch_v17
+
+6) Output naming conveniences
+python sam2_pal_batch_v17.py \
+  ... \
+  --output_timestamp \
+  --output_category_prefix
+
+
+Adds timestamps to outputs and prefixes mask filenames with category names. 
+
+
+Recipes — v10 True Video
+1) End-to-end: video → frames → train → predict COCO
+python sam2_finetune_palindrome_video_v10.py \
+  --input /path/to/video.mp4 \
+  --annotations /path/to/keyframes_coco.json \
+  --output_dir /path/to/out_video_v10/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2.1_hiera_large.pt \
+  --model_cfg /path/to/configs/sam2.1/sam2.1_hiera_l.yaml \
+  --use_lora --lora_rank 8 \
+  --epochs 25 --learning_rate 1e-4 \
+  --export_predictions predictions.json
+
+
+Extracts frames into output_dir/frames
+
+Fine-tunes using keyframes
+
+Propagates through all frames and writes COCO predictions (streaming writer). 
+
+sam2_finetune_palindrome_video_…
+
+2) If you already extracted frames (recommended for control)
+python sam2_finetune_palindrome_video_v10.py \
+  --video_dir /path/to/frames_dir \
+  --annotations /path/to/keyframes_coco.json \
+  --output_dir /path/to/out_video_v10/ \
+  --sam2_checkpoint /path/to/checkpoints/sam2.1_hiera_large.pt \
+  --model_cfg /path/to/configs/sam2.1/sam2.1_hiera_l.yaml \
+  --use_lora --lora_rank 8 \
+  --epochs 25 --learning_rate 1e-4 \
+  --export_predictions predictions.json
+
+
+Same as above, but you control your own extraction / FPS. 
+
+sam2_finetune_palindrome_video_…
+
+3) Train once, predict many times (no retraining)
+# Train (produces checkpoint)
+python sam2_finetune_palindrome_video_v10.py \
+  --video_dir /path/to/frames_dir \
+  --annotations /path/to/keyframes_coco.json \
+  --output_dir /path/to/out_video_v10/ \
+  --use_lora --lora_rank 8 \
+  --epochs 25 --learning_rate 1e-4
+
+# Predict later (skip training, load checkpoint)
+python sam2_finetune_palindrome_video_v10.py \
+  --video_dir /path/to/frames_dir \
+  --annotations /path/to/keyframes_coco.json \
+  --output_dir /path/to/out_video_v10/ \
+  --checkpoint /path/to/out_video_v10/sam2_palindrome_v10.pt \
+  --skip_training \
+  --export_predictions predictions.json
+
+
+--skip_training + --checkpoint is the intended “predict-only” pathway in v10.
+
 
 ⚙️ Parameters Reference
 Essential Arguments
