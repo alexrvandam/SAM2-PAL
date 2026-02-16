@@ -1,5 +1,5 @@
 # SAM2-PAL
-SAM2-Palindrome <u><strong>PAL</strong></u>: Self-Training with Cycle Consistency
+SAM2-Palindrome: Self-Training with Cycle Consistency
 
 <p align="center">
   <img src="sam2-pal-marmot.png" alt="Descriptron and SAM2 Pals in the Alps" width="600"/>
