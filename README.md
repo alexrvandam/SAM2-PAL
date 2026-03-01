@@ -1,8 +1,5 @@
 # SAM2-PAL: SAM2-Palindrome Self-Training with Cycle Consistency
 
-<p align="center">
-  <img src="sam2-pal-marmot.png" alt="Descriptron and SAM2 Pals in the Alps" width="600"/>
-</p>
 Multi-object palindrome-based self-training for efficient batch segmentation of morphological structures in taxonomic specimens.
 This implementation is inspired by the OC-CCL (One-Click Cycle-Consistent Learning) methodology described in "Static Segmentation by Tracking" (Feng et al., 2025). This is an original implementation with extensions for multi-object and multi-template training, integrated with the Descriptron GUI (Van Dam & Štarhová Serbina, 2025) for taxonomic digitization workflows.
 
@@ -608,3 +605,7 @@ This work builds on:
 }
 \```
 
+
+<p align="center">
+  <img src="sam2-pal-marmot.png" alt="Descriptron and SAM2 Pals in the Alps" width="600"/>
+</p>
