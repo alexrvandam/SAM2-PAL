@@ -68,7 +68,7 @@ SAM2 (Segment Anything Model 2)
 
 Setup
 bash# Clone repository
-git clone https://github.com/yourusername/SAM2-PAL.git
+git clone https://github.com/alexrvandam/SAM2-PAL.git
 cd SAM2-PAL
 
 # Create environment
@@ -566,7 +566,7 @@ If you use this work, please cite:
 \```bibtex
 @software{Van Dam, Alex R.},
   title = {{SAM2-PAL}: Multi-Object Extension},
-  author = {Your Name},
+  author = {Van Dam, Aelx R.},
   year = {2025},
   url = {https://github.com/alexrvandam/SAM2-PAL}
 }
