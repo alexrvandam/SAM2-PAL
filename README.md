@@ -616,15 +616,26 @@ If you use this work, please cite:
 
 Van Dam, A. R. (2026). SAM2-PAL: SAM2-Palindrome Self-Training with Cycle Consistency (v0.1.0). [Computer software] Zenodo. https://doi.org/10.5281/zenodo.18924240
 
-\```bibtex
-@software{Van Dam, Alex R.},
-  title = {{SAM2-PAL}: Multi-Object Extension},
-  author = {Van Dam, Aelx R.},
-  year = {2025},
-  url = {https://github.com/alexrvandam/SAM2-PAL}
+```bibtex
+@software{alexrvandam_2026_18924240,
+  author       = {Van Dam, Alex R.},
+  title        = {SAM2-PAL: SAM2-Palindrome
+                   Self-Training with Cycle Consistency
+                  },
+  month        = mar,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v0.1.0},
+  doi          = {10.5281/zenodo.18924240},
+  url          = {https://doi.org/10.5281/zenodo.18924240},
+  swhid        = {swh:1:dir:15215a791ceb7240b595f299c326b3803f324f15
+                   ;origin=https://doi.org/10.5281/zenodo.18924239;vi
+                   sit=swh:1:snp:7b472d097a7f67aaf9568a5d8028a2ab94d2
+                   5e53;anchor=swh:1:rel:8c6087f3691a8593d8134e24d291
+                   4b4fee740360;path=alexrvandam-SAM2-PAL-6f8b58a
+                  },
 }
-\```
-
+```
 This work builds on:
 
 **Descriptron GUI:**
