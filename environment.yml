@@ -1,0 +1,24 @@
+name: sam2_pal
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pillow
+  - tqdm
+  - opencv
+  - pyyaml
+  - matplotlib
+  - scipy
+  - pytorch
+  - torchvision
+  - pytorch-cuda=12.1
+  - pip:
+      - hydra-core
+      - omegaconf
+      - iopath
+      - peft
+      - git+https://github.com/facebookresearch/sam2.git
