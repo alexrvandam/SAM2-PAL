@@ -93,6 +93,57 @@ wget https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_large.p
 # Or Base+ model (faster)
 wget https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_base_plus.pt
 
+# Or using the environment.yml provided as part of this repo
+## Create the Conda environment
+
+This repository includes an `environment.yml` file so users can recreate the Python environment needed to run the scripts.
+
+### 1. Install Conda
+Make sure you have one of the following installed:
+
+- [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+- [Anaconda](https://www.anaconda.com/download)
+- [Mambaforge / Miniforge](https://github.com/conda-forge/miniforge)
+
+### 2. Clone this repository
+```bash
+git clone https://github.com/alexrvandam/SAM2-PAL.git
+cd SAM2-PAL
+
+conda env create -f environment.yml
+
+# you also need to get your hands on SAM2 and as described above but I describe how to do it again here:
+## Download SAM 2 model files
+
+This project uses the official `sam2` package from Meta/Facebook Research.
+
+Please download the model checkpoints and matching YAML configs from the official SAM 2 repository:
+
+- Official repository: `facebookresearch/sam2`
+- Checkpoint download section: see the repository README under **Download Checkpoints**
+
+Important:
+- Use a **matching checkpoint and config pair**
+- **SAM 2.1 checkpoints require the latest SAM 2 code**
+- Do **not** mix original SAM 2 checkpoints with SAM 2.1 YAML configs, or vice versa
+
+Recommended folder layout:
+
+```text
+SAM2-PAL/
+├── sam2_pal_batch_v17.py
+├── sam2_finetune_palindrome_video_v10.py
+├── checkpoints/
+│   ├── sam2_hiera_large.pt
+│   └── sam2.1_hiera_large.pt
+├── sam2_configs/
+│   └── sam2_hiera_l.yaml
+└── configs/
+    └── sam2.1/
+        └── sam2.1_hiera_l.yaml
+```
+
+        
 🚀 Usage
 Basic: Single Template, Single Structure
 bashpython sam2_pal_batch_v17.py \
