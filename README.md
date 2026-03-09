@@ -614,6 +614,8 @@ Representative of collection
 
 If you use this work, please cite:
 
+Van Dam, A. R. (2026). SAM2-PAL: SAM2-Palindrome Self-Training with Cycle Consistency (v0.1.0). [Software] Zenodo. https://doi.org/10.5281/zenodo.18924240
+
 \```bibtex
 @software{Van Dam, Alex R.},
   title = {{SAM2-PAL}: Multi-Object Extension},
