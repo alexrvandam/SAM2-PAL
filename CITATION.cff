@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use SAM2-PAL, please cite it using the metadata below."
+title: "SAM2-PAL"
+version: "v0.1.0"
+type: software
+authors:
+  - family-names: "Van Dam"
+    given-names: "Alex R."
+    orcid: "https://orcid.org/0000-0002-1966-0338"
+doi: "10.5281/zenodo.18924240"
+date-released: 2026-03
+repository-code: "https://github.com/alexrvandam/SAM2-PAL"
+url: "https://github.com/alexrvandam/SAM2-PAL"
+abstract: "SAM2-PAL: SAM2-Palindrome Self-Training with Cycle Consistency for efficient batch segmentation of morphological structures in taxonomic specimens."
+keywords:
+  - "SAM2"
+  - "segmentation"
+  - "computer vision"
+  - "taxonomy"
+  - "morphology"
+  - "cycle consistency"
+  - "self-training"
+license: "MIT"
+preferred-citation:
+  type: software
+  authors:
+    - family-names: "Van Dam"
+      given-names: "Alex R."
+      orcid: "https://orcid.org/0000-0002-1966-0338"
+  title: "SAM2-PAL: SAM2-Palindrome Self-Training with Cycle Consistency"
+  version: "v0.1.0"
+  doi: "10.5281/zenodo.18924240"
+  publisher: "Zenodo"
+  year: 2026
+  url: "https://doi.org/10.5281/zenodo.18924240"
