@@ -129,7 +129,7 @@ Important:
 
 Recommended folder layout:
 
-```text
+```
 SAM2-PAL/
 ├── sam2_pal_batch_v17.py
 ├── sam2_finetune_palindrome_video_v10.py
