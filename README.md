@@ -93,7 +93,7 @@ wget https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_large.p
 # Or Base+ model (faster)
 wget https://dl.fbaipublicfiles.com/segment_anything_2/072824/sam2_hiera_base_plus.pt
 
-# Or using the environment.yml provided as part of this repo
+# Or to download and setup SAM2-PAL you can use the environment.yml provided as part of this repo
 ## Create the Conda environment
 
 This repository includes an `environment.yml` file so users can recreate the Python environment needed to run the scripts.
